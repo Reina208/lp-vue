@@ -75,27 +75,26 @@
       </div>
       <div id="contact">
         <h2 class="section-title">contact</h2>
-        <form class="form" method="post">
           <div>
             <label for="name">Name:</label>
-            <input type="text" id="name" name="user_name" />
+            <input type="text" id="name" name="user_name" v-model="email" />
           </div>
           <div>
             <label for="mail">E-mail:</label>
-            <input type="email" id="mail" name="user_mail" />
+            <input type="email" id="mail" name="user_mail" v-model="email" />
           </div>
           <div>
             <label for="tell">Tell:</label>
-            <input type="tell" id="tell" name="user_name" />
+            <input type="tell" id="tell" name="user_name" v-model="tell"/>
           </div>
           <div>
             <label for="msg">Message:</label>
-            <textarea id="msg" name="user_message"></textarea>
+            <textarea id="msg" name="user_message" v-model="msg"></textarea>
           </div>
           <div class="button-submit">
-            <button class="button" type="submit">Button</button>
+            <button class="button" type="submit" @click="sendContact()">Button</button>
           </div>
-        </form>
+        
       </div>
     </main>
     <CommonFooter></CommonFooter>
@@ -110,7 +109,7 @@ export default {
     return{
       business: [
         {
-          img:require("./assets/img/business-icon.png"),
+          img: require("./assets/img/business-icon.png"),
           title:"ビジネスA",
           description:
           "ビジネスの説明が入ります。ビジネスの説明が入ります。ビジネスの説明が入ります。ビジネスの説明が入ります。"
@@ -128,12 +127,36 @@ export default {
             "ビジネスの説明が入ります。ビジネスの説明が入ります。ビジネスの説明が入ります。ビジネスの説明が入ります。"
         }
       
-      ]
+      ],
+
+      text:"",
+      email:"",
+      tell:"",
+      msg:""
     };
   },
   components: {
     CommonHeader,
     CommonFooter
+  },
+
+  methods:{
+    sendContact(){
+      if(
+        this.text == "" ||
+        this.email == "" ||
+        this.tell == "" ||
+        this.msg == "" 
+      ){
+        alert("入力されていない項目があります");
+      } else{
+        this.text = "";
+        this.email = "";
+        this.tell ="";
+        this.msg ="";
+        alert("送信しました");
+      }
+    }
   }
 };
 </script>
